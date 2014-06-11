@@ -3,122 +3,216 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Guess the Number!</title>
+    <title>MY SHIT!</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css">
+    <style>
+/*    *{
+        border: 1px solid black;
+    }*/
+    body {
+        background-color: #7fffd8;  
+    }
+    </style>
   </head>
   <body>
     <!-- body goes here -->
-    <!-- <div class="row">
+    <div class="row">
     	<div class="small-12 large-8 small-centered large-centered columns">
-    		<h2>Number Guessing Game!</h2>
+    		<h2><center>Number Guessing Game!<center></h2>
     	</div>
-    </div> -->
+    </div>
+    <hr style="margin-top: 0px;">
+    <div class="row">
+        <div class="small-12 large-8 small-centered large-centered columns">
+            <h6><center>Pick a Number from 1-100:</center></h6>
+        </div>
+    </div>
 
-<label>Pick a Number from 1-100:</label>
-<label id="response"></label>
-<br/>
-<input id="user-input" type="text" />
-<input id="submit-button" type="button" value="Guess" />
-<input id="reset-button" type="button" value="Reset" />
+    <div class="row">
+        <div class="small-3 large-3 small-centered large-centered columns">
+            <input id="user-input" type="text" style="text-align: center"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 large-8 small-centered large-centered columns">
+            <center><label id="response"></label></center>
+        </div>
+    </div>
+    <br>
 
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><input id="submit-button" type="button" value="Guess" /></center>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><input id="reset-button" type="button" value="Reset" /></center>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><label id="landmine"></label></center>
+        </div>
+    </div>
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
+	</script>
+
+    <script type="text/javascript">
     (function() {
-    	var gameOver = false;
-      var gameStart = true;
-    	var secretNumber = function() {
-    		secret = parseInt(Math.random() * 100, 10) + 1;
-    		console.log("Secret number is: " + secret);
-    		return secret
-    	};
-    	var checkNum = function(guess, actual) {
-        if (!gameOver)
-      		if (guess === actual){
-      			return "correct";
-            gameOver = true;
-      		}
-      		else if (guess > actual){
-      			return "high";
-      		}
-      		else {
-      			return "low";
-      		}
-        else {
-          $('#response').text('Press Reset');
-        }
-    	};
+        var gameOver = false;
+        var gameStart = true;
+        var secretNumber = function() {
+            secret = parseInt(Math.random() * 100, 10) + 1;
+            return secret
+        };
+        var landMines = function(secret) {
+            var array = [];
+            while(array.length < 3){
+                landmine = parseInt(Math.random() * 100, 10) + 1;
+                if (landmine !== secret){
+                    array.push(landmine);
+                }
+            }
+            return array
+        };
+        var checkNum = function(guess, actual) {
+            if (!guess){
+                return "nothing"
+            }
+            if (!gameOver)
+                if (guess === actual){
+                    gameOver = true;
+                    return "correct";
+                }
+                else if (guess > actual){
+                    return "high";
+                }
+                else {
+                    return "low";
+                }
+            else {
+                return "reset"
+            }
+        };
 
-    	$('#submit-button').on('click', function(e){
-        e.preventDefault();
-        if (gameStart) {
-          secret = secretNumber();
-          var guess = +$('#user-input').val();
-          answer = checkNum(guess, secret);
-          gameStart = false;
-        }
-        else {
-          var guess = +$('#user-input').val();
-          answer = checkNum(guess, secret);
-          gameStart = false;
-        }
-      });
+        var checkLandMines = function(guess, landmines){
+            distance = [];
+            for (var i = 0; i < landmines.length; i++){
+                distance.push(Math.abs(landmines[i] - guess));
+            }
+            return distance
+        };
+        
+        var output = function(data) {
+            if (data === 'nothing'){
+                $('#response').text('Enter something');
+                return
+            }
+            if (data === 'correct'){
+                $('#response').text('You got it!');
+            }
+            else if (data === 'high'){
+                $('#response').text('You guessed high. Guess lower.');
+            }
+            else if (data === 'low'){
+                $('#response').text('You guessed low. Guess higher.');
+            }
+            else{
+                $('#response').text('I dont know what happened');
+            }
+        };
 
+        var landMineColor = function(mindistance){
+            if (mindistance === 1){
+                console.log("YOUR IN THE LANDMINE color function")
+                $('#landmine').css("background-color", "red");
+            }
+            else if (mindistance >= 2 && mindistance <= 5)
+            {
+                $('#landmine').css("background-color", "yellow");   
+            }
+            else {
+                $('#landmine').css("background-color", "grey");
+            }
 
-
-
-
-
-
-
-    		if (!gameOver) {
-					var guess = +$('#user-input').val();
-					answer = checkNum(guess, secret);
-					if (answer === "correct"){
-						$('#response').text('Thats correct!');
-						gameOver = true;
-					} else if (answer === "high"){
-						$('#response').text('Guess lower!');	
-					} else if (answer === "low"){
-						$('#response').text('Guess higher!');	
-					} else {
-						$('#response').text('I dont know what happend');	
-					}
-				} else {
-    			$('#response').text('Game is over you need to start a new game.');	
-    		}
-    	});
-
-    	// game();
-    	$('#reset-button').on('click', function(e){
-    		e.preventDefault();
-    		$('#user-input').val("");
-    		
-    	});
-
-    	var game = function() {
-    		 if (gameOver) {
-	    		console.log('game has started ');
-	    		secret = secretNumber();
-	    		console.log('secret number is ', secret);
-	    		gameOver = false;
-    		} else {
-    			$('#response').text('Game is over you need to start a new game.');	
-    		}
-    	}
+        };
 
 
+        var game = function() {
+            if (gameStart) {
+              secret = secretNumber();
+                console.log("Secret number is: " + secret);
+              landmines = landMines(secret);
+                console.log("landmines", landmines);
+              gameStart = false;
+            }
+            if (!gameOver){
+                var guess = +$('#user-input').val();
+                answer = checkNum(guess, secret);
+                    console.log("answer", answer)
+
+                distances = checkLandMines(guess, landmines);
+                    console.log("distances", distances)
+
+                mindistance = Math.min.apply(Math, distances)
+
+                if (mindistance === 0){
+                    gameOver = true;
+                    $('#response').text('You guessed the landmine!');
+                    $('#landmine').text("");
+                } 
+                else {
+                    
+                    output(answer)
+                    response = $('#response').text();
+ 
+
+                        console.log(response)
+                    if (response === "Enter something"){
+                        $('#landmine').text("");
+                        landMineColor(mindistance)
+                    }  
+                    else {
+                        $('#landmine').text("Mine is "+mindistance+" spots away!");
+                        landMineColor(mindistance)
+                    }
+                }
+            }
+            else {
+                $('#response').text('Reset the game');
+            }
+        };
+
+        $('#submit-button').on('click', function(e){
+            e.preventDefault();
+            game();
+            
+        });
+        $('#reset-button').on('click', function(e){
+            e.preventDefault();
+            $('#user-input').val("");
+            $('#landmine').val("");
+            $('#response').val("");
+
+            gameStart = true;
+            gameOver = false;
+            game();
+        });
     })();
-    
-		</script>
+    </script
 
 
 
 
   </body>
-</html>
+</html
 
 
