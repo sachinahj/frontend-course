@@ -1,4 +1,3 @@
-
 // Using NaN instead of null is a clever hack. See checkForWinner for details.
 var spaces = [
   NaN, NaN, NaN,
