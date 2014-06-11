@@ -37,7 +37,7 @@
     </div>
     <div class="row">
         <div class="small-12 large-8 small-centered large-centered columns">
-            <center><label id="response">holder</label></center>
+            <center><label id="response"></label></center>
         </div>
     </div>
     <br>
@@ -53,7 +53,12 @@
             <center><input id="reset-button" type="button" value="Reset" /></center>
         </div>
     </div>
-
+    
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><label id="landmine"></label></center>
+        </div>
+    </div>
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -66,8 +71,17 @@
         var gameStart = true;
         var secretNumber = function() {
             secret = parseInt(Math.random() * 100, 10) + 1;
-            console.log("Secret number is: " + secret);
             return secret
+        };
+        var landMines = function(secret) {
+            var array = [];
+            while(array.length < 3){
+                landmine = parseInt(Math.random() * 100, 10) + 1;
+                if (landmine !== secret){
+                    array.push(landmine);
+                }
+            }
+            return array
         };
         var checkNum = function(guess, actual) {
             if (!guess){
@@ -87,6 +101,14 @@
             else {
                 return "reset"
             }
+        };
+
+        var checkLandMines = function(guess, landmines){
+            distance = [];
+            for (var i = 0; i < landmines.length; i++){
+                distance.push(Math.abs(landmines[i] - guess));
+            }
+            return distance
         };
         
         var output = function(data) {
@@ -113,13 +135,37 @@
         var game = function() {
             if (gameStart) {
               secret = secretNumber();
+                console.log("Secret number is: " + secret);
+              landmines = landMines(secret);
+                console.log("landmines", landmines);
               gameStart = false;
             }
             if (!gameOver){
                 var guess = +$('#user-input').val();
                 answer = checkNum(guess, secret);
-                console.log(answer)
-                output(answer)
+                    console.log("answer", answer)
+
+                distances = checkLandMines(guess, landmines);
+                    console.log("distances", distances)
+
+                if (Math.min.apply(Math, distances) === 0){
+                    gameOver = true;
+                    $('#response').text('You guessed the landmine!');
+                } 
+                else {
+                    
+                    output(answer)
+                    response = $('#response').text();
+ 
+
+                        console.log(response)
+                    if (response === "Enter something"){
+                        $('#landmine').text("");
+                    }  
+                    else {
+                        $('#landmine').text("Mine is "+Math.min.apply(Math, distances)+" spots away!");
+                    }
+                }
             }
             else {
                 $('#response').text('Reset the game');
@@ -134,6 +180,9 @@
         $('#reset-button').on('click', function(e){
             e.preventDefault();
             $('#user-input').val("");
+            $('#landmine').val("");
+            $('#response').val("");
+
             gameStart = true;
             gameOver = false;
             game();
