@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MY SHIT!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css">
+    <style>
+/*    *{
+        border: 1px solid black;
+    }*/
+    body {
+        background-color: #7fffd8;  
+    }
+    </style>
+  </head>
+  <body>
+    <!-- body goes here -->
+    <div class="row">
+    	<div class="small-12 large-8 small-centered large-centered columns">
+    		<h2><center>Number Guessing Game!<center></h2>
+    	</div>
+    </div>
+    <hr style="margin-top: 0px;">
+    <div class="row">
+        <div class="small-12 large-8 small-centered large-centered columns">
+            <h6><center>Pick a Number from 1-100:</center></h6>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 large-3 small-centered large-centered columns">
+            <input id="user-input" type="text" style="text-align: center"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 large-8 small-centered large-centered columns">
+            <center><label id="response">holder</label></center>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><input id="submit-button" type="button" value="Guess" /></center>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 large-1 small-centered large-centered columns">
+            <center><input id="reset-button" type="button" value="Reset" /></center>
+        </div>
+    </div>
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+	</script>
+
+    <script type="text/javascript">
+    (function() {
+        var gameOver = false;
+        var gameStart = true;
+        var secretNumber = function() {
+            secret = parseInt(Math.random() * 100, 10) + 1;
+            console.log("Secret number is: " + secret);
+            return secret
+        };
+        var checkNum = function(guess, actual) {
+            if (!guess){
+                return "nothing"
+            }
+            if (!gameOver)
+                if (guess === actual){
+                    gameOver = true;
+                    return "correct";
+                }
+                else if (guess > actual){
+                    return "high";
+                }
+                else {
+                    return "low";
+                }
+            else {
+                return "reset"
+            }
+        };
+        
+        var output = function(data) {
+            if (data === 'nothing'){
+                $('#response').text('Enter something');
+                return
+            }
+            if (data === "reset"){
+                $('#response').text('Reset');
+            }
+            if (data === 'correct'){
+                $('#response').text('You got it!');
+            }
+            else if (data === 'high'){
+                $('#response').text('You guessed high. Guess lower.');
+            }
+            else if (data === 'low'){
+                $('#response').text('You guessed low. Guess higher.');
+            }
+            else{
+                $('#response').text('I dont know what happened');
+            }
+        };
+        var game = function() {
+            if (gameStart) {
+              secret = secretNumber();
+              gameStart = false;
+            }
+            if (!gameOver){
+                var guess = +$('#user-input').val();
+                answer = checkNum(guess, secret);
+                console.log(answer)
+                output(answer)
+            }
+            else {
+                $('#response').text('Reset the game');
+            }
+        };
+
+        $('#submit-button').on('click', function(e){
+            e.preventDefault();
+            game();
+            
+        });
+        $('#reset-button').on('click', function(e){
+            e.preventDefault();
+            $('#user-input').val("");
+            gameStart = true;
+            gameOver = false;
+            game();
+        });
+    })();
+    </script
+
+
+
+
+  </body>
+</html
+
+
