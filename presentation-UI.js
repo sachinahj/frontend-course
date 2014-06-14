@@ -43,6 +43,7 @@
         }
         if (!bl.gameOver){
             var guess = +$('#user-input').val();
+            console.log("guess", guess);
             answer = bl.checkNum(guess, secret);
                 console.log("answer", answer)
 
