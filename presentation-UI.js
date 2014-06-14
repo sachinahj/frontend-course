@@ -1,5 +1,5 @@
 (function(){
-    var output = function(data) {
+    var output = function(data, guess) {
         if (data === 'nothing'){
             $('#response').text('Enter something');
             return
@@ -8,10 +8,10 @@
             $('#response').text('You got it!');
         }
         else if (data === 'high'){
-            $('#response').text('You guessed high. Guess lower.');
+            $('#response').text('You guessed '+guess+'. Guess lower.');
         }
         else if (data === 'low'){
-            $('#response').text('You guessed low. Guess higher.');
+            $('#response').text('You guessed '+guess+'. Guess higher.');
         }
         else{
             $('#response').text('I dont know what happened');
@@ -43,6 +43,7 @@
         }
         if (!bl.gameOver){
             var guess = +$('#user-input').val();
+            $('#user-input').val("");
             console.log("guess", guess);
             answer = bl.checkNum(guess, secret);
                 console.log("answer", answer)
@@ -59,7 +60,7 @@
             } 
             else {
                 
-                output(answer)
+                output(answer, guess)
                 response = $('#response').text();
 
 
