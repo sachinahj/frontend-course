@@ -26,8 +26,7 @@
   $(document).on('game-win', function (e, winner) {
     // TODO: Alert who won the game
     bl.gameOver = true;
-
-    $(document).trigger('animation', winner);
+    $('#board .space.'+bl.otherPlayer+'').fadeTo(2500, 0.0001); 
     
     if (winner === bl.player1) {
       p1 = parseInt(+$('#p1-wins').text());
@@ -38,10 +37,8 @@
       $('#p2-wins').text(p2+1);
     }
     
-    var alertgameover = function() {alert(winner+" has won the game!")};
-    setTimeout(alertgameover,1500);
+    setTimeout(function() {alert(winner+" has won the game!")},1500);
 
-    
   });
 
   $('#restart-button').on('click', function (e) {
@@ -59,15 +56,6 @@
     $('#board .space').removeClass('player1');
     $('#board .space').removeClass('player2');
     bl.setNextTurn();
-  });
-
-  $(document).on('animation', function (e, winner) {
-    for (var i = 0; i <= 8; i++) {
-      console.log("i", $('#board .space:eq('+i+')').hasClass(winner));
-      if (!$('#board .space:eq('+i+')').hasClass(winner)){
-        $('#board .space:eq('+i+')').fadeTo(1000, 0.0001); 
-      }
-    }
   });
 
   bl.setNextTurn();

@@ -12,12 +12,16 @@
     this.currentPlayer = null;
     this.gameOver = false;
 
+    this.otherPlayer = null;
+
     this.setNextTurn = function () {
       if (this.currentPlayer === this.player1) {
         this.currentPlayer = this.player2;
+        this.otherPlayer = this.player1;
       }
       else {
         this.currentPlayer = this.player1;
+        this.otherPlayer = this.player2;
       }
       $('#turn-label').text(this.currentPlayer);
     };
