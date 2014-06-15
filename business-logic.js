@@ -43,6 +43,6 @@
             }
             return distance
         };
-    }	;
+    };
     window.bl = new BusinessLogic();
 })();
