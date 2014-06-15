@@ -16,11 +16,11 @@
 }
 
 /* Change background picture based on class name */
-#board .space.veggies {
+#board .space.player1 {
   background: url("img/veggies.jpg");
   background-size: 100% 100%;
 }
-#board .space.junkfood {
+#board .space.player2 {
   background: url("img/junkfood.jpg");
   background-size: 100% 100%;
 }

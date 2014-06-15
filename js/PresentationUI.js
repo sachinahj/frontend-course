@@ -37,8 +37,11 @@
       p2 = parseInt(+$('#p2-wins').text());
       $('#p2-wins').text(p2+1);
     }
+    
+    var alertgameover = function() {alert(winner+" has won the game!")};
+    setTimeout(alertgameover,1500);
 
-    alert(winner+" has won the game!");
+    
   });
 
   $('#restart-button').on('click', function (e) {
@@ -53,19 +56,16 @@
     for (var i = 0; i <= 8; i++) {
         $('#board .space:eq('+i+')').fadeTo(0.1, 1); 
     }
-    $('#board .space').removeClass('veggies');
-    $('#board .space').removeClass('junkfood');
+    $('#board .space').removeClass('player1');
+    $('#board .space').removeClass('player2');
     bl.setNextTurn();
   });
 
   $(document).on('animation', function (e, winner) {
     for (var i = 0; i <= 8; i++) {
       console.log("i", $('#board .space:eq('+i+')').hasClass(winner));
-      if ($('#board .space:eq('+i+')').hasClass(winner)){
-        $('#board .space:eq('+i+')').fadeTo(5000, 1);
-      }
-      else {
-        $('#board .space:eq('+i+')').fadeTo(5000, 0.0001); 
+      if (!$('#board .space:eq('+i+')').hasClass(winner)){
+        $('#board .space:eq('+i+')').fadeTo(1000, 0.0001); 
       }
     }
   });

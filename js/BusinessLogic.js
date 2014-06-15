@@ -7,8 +7,8 @@
       NaN, NaN, NaN
     ];
 
-    this.player1 = 'veggies';
-    this.player2 = 'junkfood';
+    this.player1 = 'player1';
+    this.player2 = 'player2';
     this.currentPlayer = null;
     this.gameOver = false;
 
