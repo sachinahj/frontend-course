@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Restaurant Reservations</title>
+  <style>
+    .name-field {
+      box-shadow: none;
+      border: none;
+      border-bottom: 1px solid gray;
+    }
+    .name-field:focus{
+      outline: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+<input class="name-field" type="text" placeholder="name"/>
+<br><br>
+<button id="claim">Claim a Reservatios</button>
+<button id="reserve">Make a Reservatios</button>
+<hr>
+<div class="people">
+  <div class="reservations">
+    <h3>Reservations</h3>
+  </div>
+  <div class="claimed">
+    <h3>Claimed</h3>
+  </div>
+</div>
+
+<script src="./vendor/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="./js/business-logic.js"></script>
+<script type="text/javascript" src="./js/presentation-UI.js"></script>
+
+</body>
+</html>

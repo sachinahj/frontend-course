@@ -1,0 +1,177 @@
+<html>
+	<head>
+  	<title>Jumping Buttons</title>
+  	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css">
+  	<style>
+  	* {
+  		-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+  	}
+  	.jumping-bean { 
+    	font-size: 1em;
+    	position: absolute;
+    	margin-top: 0px;
+    	margin-left: 0px;
+    	border-radius: 100%;
+	  }
+  	.jumping-bean:focus {
+  		outline: none;
+  	}
+	</style>
+</head>
+
+<body>
+	<div class="row">
+		<button class="start">start</button>
+		<center><div class="timer">0 Seconds</div></center>
+	</div>
+	<!-- <button class='jumping-bean'>how u bean</button> -->
+	<!-- <button id='my-button'>button</button> -->
+</body>
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	var gameOver = true;
+	var gameStart = false;
+	// JUMPING BEAN
+	var createButtons = function () {
+		width = $(document).width();
+		height = $(document).height();
+		console.log("width", width);
+		console.log("height", height);
+		height4th = height / 4;
+		width3rd = width / 3;
+		width4th = width / 4;
+		$('body').append("<button id='one' class='jumping-bean'>1</button>");
+		$('body').append("<button id='two' class='jumping-bean'>2</button>");
+		$('body').append("<button id='three' class='jumping-bean'>3</button>");
+		$('body').append("<button id='four' class='jumping-bean'>4</button>");
+		$('body').append("<button id='five' class='jumping-bean'>5</button>");
+		$('body').append("<button id='six' class='jumping-bean'>6</button>");
+		$('body').append("<button id='seven' class='jumping-bean'>7</button>");
+		$('body').append("<button id='eight' class='jumping-bean'>8</button>");
+		jumping_bean_width = $('.jumping-bean').width();
+		width = 0;
+		$('.jumping-bean:eq(0)').css("margin-left", (width4th)+'px'  ).css("margin-top", (height4th)+'px');
+		$('.jumping-bean:eq(1)').css("margin-left", (2*width4th+jumping_bean_width)+'px'  ).css("margin-top", (height4th)+'px');
+		$('.jumping-bean:eq(2)').css("margin-left", (3*width4th+2*jumping_bean_width)+'px'  ).css("margin-top", (height4th)+'px');
+		$('.jumping-bean:eq(3)').css("margin-left", (width3rd)+'px'  ).css("margin-top", (2*height4th)+'px');
+		$('.jumping-bean:eq(4)').css("margin-left", (2*width3rd+jumping_bean_width)+'px'  ).css("margin-top", (2*height4th)+'px');
+		$('.jumping-bean:eq(5)').css("margin-left", (width4th)+'px'  ).css("margin-top", (3*height4th)+'px');
+		$('.jumping-bean:eq(6)').css("margin-left", (2*width4th+jumping_bean_width)+'px'  ).css("margin-top", (3*height4th)+'px');
+		$('.jumping-bean:eq(7)').css("margin-left", (3*width4th+2*jumping_bean_width)+'px'  ).css("margin-top", (3*height4th)+'px');
+	};
+
+	var randomPx = function () {
+		random = Math.floor(Math.random() * 100) + -50;
+  		return random;
+	};
+
+	var checkPx = function (addtop, addleft, id) {
+		buffer = 50;
+
+		jb_width = $('.jumping-bean').width() + buffer;
+		jb_height = $('.jumping-bean').height() + buffer;
+		width = $(document).width() - jb_width - buffer;
+		height = $(document).height() - jb_height - buffer;
+		ids = ['one','two','three','four','five','six','seven','eight'];
+
+		toppy = parseInt($('.jumping-bean#'+ids[id]+'').css("marginTop"));
+		left = parseInt($('.jumping-bean#'+ids[id]+'').css("marginLeft"));
+
+		if (addleft + left > width) { addleft = width - left;	}
+		if (addleft + left < jb_width) { addleft = jb_width - left; }
+		if (addtop + toppy > height) { addtop = height - toppy;}
+		if (addtop + toppy < jb_height) { addtop = jb_height - toppy;}
+
+		console.log("id", id);
+		console.log("top", toppy);
+		console.log("left", left);
+
+		return ([addtop, addleft]);
+	};
+
+	var moveButton = function() {
+
+		if (gameOver === true) {return}
+
+		ids = ['one','two','three','four','five','six','seven','eight'];
+		i = 0
+		for (var i = 0; i <= 7; i++){
+			random1 = randomPx();
+			random2 = randomPx();
+			random = checkPx(random1, random2, i)
+			$('.jumping-bean#'+ids[i]+'').css("margin-top", '+='+random[0]+'px');
+			$('.jumping-bean#'+ids[i]+'').css("margin-left", '+='+random[1]+'px');
+		}
+		setTimeout(moveButton, 500);
+	};
+
+	$(document).on('click', '.start', function () {
+		$(this).hide();
+		$(this).parent().prepend('<button class="button alert reset">reset</button>');
+		gameStart = true;
+		gameOver = false;
+		$('.jumping-bean').text('0');
+
+		var start = new Date;
+		setInterval(function() {
+		    $('.Timer').text((new Date - start) / 1000 + " Seconds");
+		}, 1);
+
+		moveButton();
+	});
+	$(document).on('click', '.reset', function () {
+		$(this).hide();
+		$(this).parent().find('.start').show();
+		gameOver = true;
+		gameStart = false;
+		$('.jumping-bean').remove();
+		createButtons();
+
+	});
+	$(document).on('click', '.jumping-bean', function () {
+		if (gameOver == true) {return}
+		clicks = +$(this).text();
+		if (clicks == 2) {
+			$(this).hide();
+		}
+		else {
+			$(this).text(clicks + 1);
+		}
+	});
+
+	createButtons();
+
+// 	//WITHER IN PAIN
+	// var witherInPain = function () {
+ 	// 	alert('ouch... *cough cough*');
+	// };
+	// $('#my-button').on('click', witherInPain);
+
+//	// 3X PASSWORD AUTHORIZATION
+// var password = function() {
+// 	var pass = prompt("enter password");
+// 	if (pass === 'sachin') {
+// 		alert('access granted');
+// 	}
+// 	else if (counter === 2) {
+// 		alert('access denied, you have been locked out');
+// 	}
+// 	else {
+// 		alert('access denied');
+// 		counter += 1;
+// 		password();
+// 	}
+	
+// };
+// counter = 0
+// password();
+
+</script>
+
+</body>
+</html>

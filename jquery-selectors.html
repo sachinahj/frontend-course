@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title>jQuery Selectors</title>
+  <style type="text/css">
+    .item {
+      padding: 8px;
+      width: 200px;
+      background: #ccc;
+    }
+    .item.active {
+      background: #cfc;
+    }
+  </style>
+</head>
+<body>
+
+<form class="new-item">
+  <label>Pre-Filled Name Input: </label><input class="name" type="text" value="Mitch Thomson" />
+  <br />
+  <label>Pre-Filled Price Input: </label>
+  <input type="text" class="price" value="Mitch is $19">
+  <br />
+  <input class="submit" type="submit" value="SUBMIT!"></input>
+</form>
+
+<div id="items">
+  <div class="item">
+    <label>Item One</label>
+    <div class="price">$11</div>
+  </div>
+
+  <div class="item active">
+    <label>Item Two</label>
+    <div class="price">$22</div>
+  </div>
+
+  <div class="item">
+    <label>Item Three</label>
+    <div class="price">$33</div>
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+// TODO
+// $('.item').eq(1).append('Buy one, Get one!!');
+// $('.item .price').eq(2).hide();
+// $('.item .price').eq(2).append('<div class="price">$121</div>');
+// $('.name:text').css("font-size", "30px").parent().css("background-color","lime");
+
+// $('body').css('background-color', 'teal').find('.item .price').css("font-size", "15px").parent().css('height', '600px');
+$('form').on('submit', function (e) {
+  e.preventDefault();
+  a = $('.name:text').val();
+  console.log("a", a);
+  $('#items').append(a);
+
+});
+
+
+
+</script>
+</body>
+</html>
