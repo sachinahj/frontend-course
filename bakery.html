@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Bakery Bonanza</title>
+  <style type="text/css">
+  #bakery .display div { width: 200px; height: 200px; float: left; }
+  #bakery .display .cupcake { background: url("http://i.imgur.com/9ix2JRZ.jpg"); }
+  #bakery .display .cookie { background: url("http://i.imgur.com/Yxq78qn.jpg"); }
+  </style>
+</head>
+<body>
+
+<div id="bakery">
+  <button class="make" data-good-type="cupcake">Make Cupcake</button>
+  <button class="make" data-good-type="cookie">Make Cookie</button>
+  <h4>Available Ingredients:</h4>
+  <ul class="ingredients">
+    <li class="flour">Flour: <span></span></li>
+    <li class="eggs">Eggs: <span></span></li>
+    <li class="sugar">Sugar: <span></span></li>
+    <li class="spice">Spice: <span></span></li>
+  </ul>
+
+  <h3>Food Display Case</h3>
+  <div class="display"></div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var bakery = {
+  supplies: {
+    flour: 4,
+    eggs: 12,
+    sugar: 17,
+    spice: 5
+  },
+  goodRequirements: {
+    cupcake: {
+      flour: 2,
+      eggs: 1,
+      sugar: 1
+    },
+    cookie: {
+      flour: 1,
+      eggs: 1,
+      sugar: 1
+    }
+    // TODO: Create required ingredients for cookie
+  },
+  make: function (goodType) {
+    console.log('Attempting to make a:', goodType);
+    var req = this.goodRequirements[goodType];
+
+    // TODO: Only make if we have enough ingredients
+    var check = true;
+    for (var i in this.goodRequirements[goodType]){     
+      if (this.goodRequirements[goodType][i] > this.supplies[i]){
+        check = false;
+      }
+    }
+
+    if (check) {
+      // TODO: Reduce the bakery's supplies by the required amount
+      for (var i in this.goodRequirements[goodType]){
+        this.supplies[i] -= this.goodRequirements[goodType][i];
+      } 
+      this.updateIngredientsList();
+      console.log('The bakery made a ' + goodType + '!');
+
+      // TODO: Add class goodType class to div
+      var goodDiv = $('<div class='+goodType+'></div');
+      $('#bakery .display').append(goodDiv);
+    }
+    else {
+      alert("Not enough ingredients to make " + goodType)
+    }
+  },
+  updateIngredientsList: function () {
+    $('.ingredients .flour span').text(this.supplies.flour);
+    // TODO: Update rest of ingredients
+    $('.ingredients .eggs span').text(this.supplies.eggs);
+    $('.ingredients .sugar span').text(this.supplies.sugar);
+    $('.ingredients .spice span').text(this.supplies.spice);
+  }
+};
+
+$('#bakery .make').on('click', function (e) {
+  var goodType = $(e.currentTarget).data('good-type');
+  // TODO: Make the good
+  bakery.make(goodType);
+});
+
+bakery.updateIngredientsList();
+
+</script>
+</body>
+</html>
