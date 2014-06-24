@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title>JS Review Exercise #5</title>
+  <style type="text/css">
+  body {
+    background: #A5A5B5;
+    color: #1c1e22;
+  }
+  h1, h2, h3 { font-family: Futura, sans-serif; }
+  h1 {
+    font-size: 3em;
+  }
+  .container {
+    width: 804px;
+    margin: 0 auto;
+  }
+  .product {
+    background: #D6DEDE;
+    float: left;
+    margin: 10px;
+    padding: 1px 20px;
+    width: 208px;
+  }
+  .product h3 {
+    color: #281737;
+    font-size: 2em;
+  }
+  .product .price {
+    color: #688779;
+    font-size: 0.65em;
+  }
+  .product label {
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Welcome to Ebazon.com</h1>
+
+  <h2>Viewing All Products:</h2>
+  <div class="products">
+
+    <div class="product">
+      <h3>Alcohol <span class="price">$8</span></h3>
+      <p>Great for cleaning wounds and healing people.</p>
+    </div>
+
+    <div class="product">
+      <h3>Joint <span class="price">$35</span></h3>
+      <p>Useful for connecting two mechanical parts together.</p>
+    </div>
+
+    <div class="product">
+      <h3>Cocane <span class="price">$40/oz</span></h3>
+      <p>A tasty treat made with organic cane sugar.</p>
+    </div>
+
+  </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+// TODO
+// $('.price').text('$0');
+// $('.price:eq(0)').text('$2');
+// $('h2').css('font-size', '5em')
+// $('.product h3').css({'color':'#F84102'}).parent().css({'height':'200px','width':'200px'})
+$('p').append(" And it tastes GREAT!!")
+
+</script>
+
+</body>
+</html>

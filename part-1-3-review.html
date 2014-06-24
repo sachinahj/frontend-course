@@ -27,7 +27,7 @@
 // };
 // console.log("Should be whatwhat:", strMult('what', 2));
 // console.log("Should be mikemikemikemikemike:", strMult('mike', 5));
-// -------------------------------------------------------
+// ----------------------
 // var aquarium = {
 //   goldfish: 3,
 //   betafish: 1,
@@ -40,7 +40,7 @@
 //   var fishType = properties[i];
 //   console.log("There are " + aquarium[fishType] + " " + fishType + " in this aquarium");
 // }
-// ---------------------------------------------------------
+// ------------------------
 // var letters = ['a', 'b', 'c', 'a', 'a', 'c'];
 // var stats = {};
 
@@ -54,7 +54,7 @@
 // }
 
 // console.log('Stats for letters:', stats);
-// -----------------------------------------------------------
+// --------------------------
 // var compact = function (array) {
 //   var results = [];
 
@@ -73,7 +73,7 @@
 // items = [{}, [], null, compact.x, compact.prototype];
 // console.log("before:", items);
 // console.log("compact again:", compact(items));
-// ----------------------------------------------------------
+// -------------------------
 // var plumber = {
 //   name: "Mario",
 //   jumpCount: 0,
@@ -85,7 +85,7 @@
 // plumber.jump();
 // plumber.jump();
 // console.log("The plumber should jump twice:", plumber.jumpCount);
-// -------------------------------------------------------------
+// ----------------------------
 // var game = {};
 // game.wins = 0;
 // game.incrementWins = function (amount) {
@@ -97,7 +97,7 @@
 
 // game.incrementWins(7);
 // console.log("Game wins should be 9:", game.wins);
-// ---------------------------------------------------------------
+// ------------------------------
 // var whinyPerson = {
 //   pokeCount: 0,
 //   poke: function () {
@@ -111,7 +111,7 @@
 
 // whinyPerson.poke();
 // console.log("Poke count should be 3:", whinyPerson.pokeCount);
-// ---------------------------------------------------------------
+// ------------------------------
 // var petBat = {
 //   awake: false
 // };
@@ -121,7 +121,7 @@
 
 // petBat.wakeUp();
 // console.log("Your pet bat should be awake:", petBat.awake === true);
-// -------------------------------------------------------------
+// ----------------------------
 // var puppy = {
 //   mood: 'hungry',
 //   feed: function () {
@@ -131,14 +131,14 @@
 // console.log("Puppy should be hungry:", puppy.mood);
 // puppy.feed();
 // console.log("Puppy should be fed:", puppy.mood);
-// -------------------------------------------------------------
+// ----------------------------
 // var createTrashCan = function (trashAmount) {
 //   return {trash: trashAmount};
 // };
 
 // var can = createTrashCan(2);
 // console.log('Trash can should have 2 trash:', can.trash);
-// --------------------------------------------------------------
+// -----------------------------
 // var createPetBat = function (happinessLevel) {
 //   return {
 //     happiness: happinessLevel,
@@ -152,7 +152,7 @@
 // console.log('Bat should begin with happiness level 5: ', bat.happiness);
 // bat.walkPetBat(2);
 // console.log('Bat has taken a walk of duration 2 and should have happiness of 7: ', bat.happiness);
-// -------------------------------------------------------------
+// ----------------------------
 // var createBattery = function (charge) {
 //   return {
 //     energy: charge,
@@ -172,7 +172,7 @@
 
 // battery.use(5);
 // console.log('Battery should have 1 energy:', battery.energy);
-// --------------------------------------------------------------
+// -----------------------------
 // var house = {
 //   room: {
 //     emptyBox: {},
@@ -188,7 +188,7 @@
 
 // var result = house.otherRoom.box.writtenNote;
 // console.log("You find a written note:", result);
-// -----------------------------------------------------------------
+// --------------------------------
 // var calculator = {};
 
 // calculator.multiply = function (a, b) {
@@ -197,7 +197,7 @@
 
 // var result = calculator.multiply(3, 7);
 // console.log('3 time 7 is', result);
-// -----------------------------------------------------------------
+// --------------------------------
 // var createHorn = function () {
 //   var horn = {};
 //   horn.honk = function (){
@@ -208,20 +208,20 @@
 
 // var myHorn = createHorn();
 // console.log('Horn should honk a honky sound:', myHorn.honk());
-// ------------------------------------------------------------------
+// ---------------------------------
 // me = {
 //   name: 'Sachin Ahuja',
 //   accent: 'english'
 // };
 // console.log("My name is " + me.name + " and I love the " + me.accent + " accent!");
-// ------------------------------------------------------------------
+// ---------------------------------
 // var book = {
 //   title: "The Mummy at the Dining Room Table",
 //   author: "George W. Bush"
 // };
 // book.author = 'Jeffrey A. Kottler';
 // console.log("The author of " + book.title + " should be  Jeffrey A. Kottler: ", book.author);
-// -------------------------------------------------------------------
+// ----------------------------------
 // var deckOfCards = {
 //   cardCount: 52,
 //   draw: function (number) {
@@ -231,7 +231,7 @@
 
 // deckOfCards.draw(15);
 // console.log("Example #1", deckOfCards.cardCount);
-// --------------------------------------------------------------------
+// -----------------------------------
 // var cuteAndCuddlyForestAnimal = {
 //   mood: 'lackadaisical',
 //   listen: function () {
@@ -254,7 +254,7 @@
 
 // var result = hunter.shoot(cuteAndCuddlyForestAnimal);
 // console.log("NO a hunter! Did it live?", result);
-// -------------------------------------------------------------
+// ----------------------------
 // var processPassword = function (password) {
 //   if (this.password === password) {
 //     return 'granted';
@@ -282,7 +282,7 @@
 // console.log('Result should be denied:', result);
 // result = door2.enterPassword('123');
 // console.log('Result should granted:', result);
-// ---------------------------------------------------------------
+// ------------------------------
 // var computer = { active: false };
 // var otherComputer = { active: false };
 
@@ -296,8 +296,57 @@
 
 // otherComputer.switchOn();
 // console.log("Other computer should be active:", otherComputer.active === true);
-// --------------------------------------------------------------------
+// -----------------------------------
+// window.msg = "It don't mean a thing";
 
+// var outerFunc = function () {
+//     msg = "If it ain't got that swing";
+
+//     var innerFunc = function () {
+//         msg = "Do-wah Do-wah Do-wah Do-wah Do-wah Do-wah Do-wah Do-wah";
+//         alert(msg);
+//     };
+//     innerFunc();
+//     alert(msg);
+// };
+// outerFunc();
+// alert(msg);
+//--------------------
+// delete window.msg;
+// var outerFunc = function () {
+//     var msg = "Don't mean a thing";
+
+//     var innerFunc = function () {
+//         window.msg = "All you gotta do is swing";
+//         alert(msg);
+//     };
+//     innerFunc();
+//     alert(msg);
+// };
+// outerFunc();
+// alert(msg);
+
+// // This is so that future exercises work as expected
+// delete window.msg;
+//--------------------
+var outerFunc = function () {
+    msg = "do-wah do-wah do-wah do-wah do-wah do-wah do-wah do-wah";
+
+    var innerA = function () {
+        var msg = "bibidah bahbadoh bahbadoday";
+        alert(msg);
+    };
+    var innerB = function () {
+        msg = "*record scratch*";
+        alert(msg);
+    };
+    innerA();
+    alert(msg);
+};
+outerFunc();
+
+// This is so that future exercises work as expected
+delete window.msg;
 
 </script>
 
