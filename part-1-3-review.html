@@ -4,26 +4,301 @@
 </head>
 <body>
 
-<label>Ow! (x<span id="poke-count">0</span>)</label>
-<input id="poke" type="submit" />
-
-
-
-
-
-
 
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-var nag = function (str) {
-  console.log(str.toUpperCase());
-};
+// var echoecho = function (string) {
+//   return string + string;
+// };
+// console.log("Should be hellohello:", echoecho('hello'));
+// console.log("Should be okok:", echoecho('ok'));
+
+// var strMult = function(string, times) {
+//   var n = 0;
+//   output = ""
+//   while (n < times){
+//     output += string
+//     n+=1
+//   }
+//   return output;
+// };
+// console.log("Should be whatwhat:", strMult('what', 2));
+// console.log("Should be mikemikemikemikemike:", strMult('mike', 5));
+// -------------------------------------------------------
+// var aquarium = {
+//   goldfish: 3,
+//   betafish: 1,
+//   octopusfish: 2,
+//   gorillafish: 1
+// }
+// // You will learn a better way to do this later
+// var properties = ['goldfish', 'betafish', 'octopusfish', 'gorillafish'];
+// for (var i = 0; i < properties.length; i += 1) {
+//   var fishType = properties[i];
+//   console.log("There are " + aquarium[fishType] + " " + fishType + " in this aquarium");
+// }
+// ---------------------------------------------------------
+// var letters = ['a', 'b', 'c', 'a', 'a', 'c'];
+// var stats = {};
+
+// for (var i = 0; i < letters.length; i += 1) {
+//   var letter = letters[i];
+
+//   if (stats[letter] === undefined) {
+//     stats[letter] = 0;
+//   }
+//   stats[letter] += 1;
+// }
+
+// console.log('Stats for letters:', stats);
+// -----------------------------------------------------------
+// var compact = function (array) {
+//   var results = [];
+
+//   for (var i = 0; i < array.length; i += 2) {
+//     if ( array[i] ) {
+//       results.push( array[i] );
+//     }
+//   }
+//   return results;
+// };
+
+// var items = [10, 'a', 0, false, true];
+// console.log("before:", items);
+// console.log("after compact:", compact(items));
+
+// items = [{}, [], null, compact.x, compact.prototype];
+// console.log("before:", items);
+// console.log("compact again:", compact(items));
+// ----------------------------------------------------------
+// var plumber = {
+//   name: "Mario",
+//   jumpCount: 0,
+//   jump: function () {
+//     this.jumpCount = this.jumpCount + 1;
+//   }
+// };
+
+// plumber.jump();
+// plumber.jump();
+// console.log("The plumber should jump twice:", plumber.jumpCount);
+// -------------------------------------------------------------
+// var game = {};
+// game.wins = 0;
+// game.incrementWins = function (amount) {
+//   game.wins += amount;
+// };
+
+// game.incrementWins(2);
+// console.log("Game wins should be 2:", game.wins);
+
+// game.incrementWins(7);
+// console.log("Game wins should be 9:", game.wins);
+// ---------------------------------------------------------------
+// var whinyPerson = {
+//   pokeCount: 0,
+//   poke: function () {
+//     this.pokeCount += 1;
+//   }
+// };
+
+// whinyPerson.poke();
+// whinyPerson.poke();
+// console.log("Poke count should be 2:", whinyPerson.pokeCount);
+
+// whinyPerson.poke();
+// console.log("Poke count should be 3:", whinyPerson.pokeCount);
+// ---------------------------------------------------------------
+// var petBat = {
+//   awake: false
+// };
+// petBat.wakeUp = function () {
+//   this.awake = true;
+// };
+
+// petBat.wakeUp();
+// console.log("Your pet bat should be awake:", petBat.awake === true);
+// -------------------------------------------------------------
+// var puppy = {
+//   mood: 'hungry',
+//   feed: function () {
+//     this.mood = 'fed';
+//   }
+// };
+// console.log("Puppy should be hungry:", puppy.mood);
+// puppy.feed();
+// console.log("Puppy should be fed:", puppy.mood);
+// -------------------------------------------------------------
+// var createTrashCan = function (trashAmount) {
+//   return {trash: trashAmount};
+// };
+
+// var can = createTrashCan(2);
+// console.log('Trash can should have 2 trash:', can.trash);
+// --------------------------------------------------------------
+// var createPetBat = function (happinessLevel) {
+//   return {
+//     happiness: happinessLevel,
+//     walkPetBat: function (walkAmount){
+//       this.happiness += walkAmount;
+//     }
+//   };
+// };
+
+// var bat = createPetBat(5);
+// console.log('Bat should begin with happiness level 5: ', bat.happiness);
+// bat.walkPetBat(2);
+// console.log('Bat has taken a walk of duration 2 and should have happiness of 7: ', bat.happiness);
+// -------------------------------------------------------------
+// var createBattery = function (charge) {
+//   return {
+//     energy: charge,
+//     use: function (amount) {
+//       if (amount < this.energy) {
+//         this.energy -= amount;
+//       }
+//     }
+//   };
+// };
+
+// var battery = createBattery(3);
+// console.log('Battery should have 3 energy:', battery.energy);
+
+// battery.use(2);
+// console.log('Battery should have 1 energy:', battery.energy);
+
+// battery.use(5);
+// console.log('Battery should have 1 energy:', battery.energy);
+// --------------------------------------------------------------
+// var house = {
+//   room: {
+//     emptyBox: {},
+//     size: '50 sqft'
+//   },
+//   otherRoom: {
+//     box: {
+//       writtenNote: "Surprise!"
+//     },
+//     size: '35 sqft'
+//   }
+// };
+
+// var result = house.otherRoom.box.writtenNote;
+// console.log("You find a written note:", result);
+// -----------------------------------------------------------------
+// var calculator = {};
+
+// calculator.multiply = function (a, b) {
+//   return a * b;
+// };
+
+// var result = calculator.multiply(3, 7);
+// console.log('3 time 7 is', result);
+// -----------------------------------------------------------------
+// var createHorn = function () {
+//   var horn = {};
+//   horn.honk = function (){
+//     return "HONKY HONK HONK";
+//   };
+//   return horn;
+// };
+
+// var myHorn = createHorn();
+// console.log('Horn should honk a honky sound:', myHorn.honk());
+// ------------------------------------------------------------------
+// me = {
+//   name: 'Sachin Ahuja',
+//   accent: 'english'
+// };
+// console.log("My name is " + me.name + " and I love the " + me.accent + " accent!");
+// ------------------------------------------------------------------
+// var book = {
+//   title: "The Mummy at the Dining Room Table",
+//   author: "George W. Bush"
+// };
+// book.author = 'Jeffrey A. Kottler';
+// console.log("The author of " + book.title + " should be  Jeffrey A. Kottler: ", book.author);
+// -------------------------------------------------------------------
+// var deckOfCards = {
+//   cardCount: 52,
+//   draw: function (number) {
+//     this.cardCount -= number;
+//   }
+// };
+
+// deckOfCards.draw(15);
+// console.log("Example #1", deckOfCards.cardCount);
+// --------------------------------------------------------------------
+// var cuteAndCuddlyForestAnimal = {
+//   mood: 'lackadaisical',
+//   listen: function () {
+//     this.mood = 'alert';
+//   }
+// };
+
+// var hunter = {
+//   shoot: function (animal) {
+//     if (animal.mood === 'alert') {
+//       return "Yes! It dodged the bullet!";
+//     }
+//     else {
+//       return "no0ooOo0o(1-1)o";
+//     }
+//   }
+// }
+
+// cuteAndCuddlyForestAnimal.listen();
+
+// var result = hunter.shoot(cuteAndCuddlyForestAnimal);
+// console.log("NO a hunter! Did it live?", result);
+// -------------------------------------------------------------
+// var processPassword = function (password) {
+//   if (this.password === password) {
+//     return 'granted';
+//   } else {
+//     return 'denied';
+//   }
+// };
+// var door1 = {
+//   password: 'abc',
+//   enterPassword: processPassword
+// };
+// var door2 = {
+//   password: '123',
+//   enterPassword: processPassword
+// };
+
+// var result;
+
+// result = door1.enterPassword('letmein');
+// console.log('Result should be denied:', result);
+// result = door1.enterPassword('abc');
+// console.log('Result should granted:', result);
+
+// result = door2.enterPassword('open up');
+// console.log('Result should be denied:', result);
+// result = door2.enterPassword('123');
+// console.log('Result should granted:', result);
+// ---------------------------------------------------------------
+// var computer = { active: false };
+// var otherComputer = { active: false };
+
+// computer.switchOn = function () {
+//   this.active = true;
+// }
+// otherComputer.switchOn = computer.switchOn;
+
+// computer.switchOn();
+// console.log("Computer should be active:", computer.active === true);
+
+// otherComputer.switchOn();
+// console.log("Other computer should be active:", otherComputer.active === true);
+// --------------------------------------------------------------------
 
 
-setInterval(console.log('yoyoyo'), 40);
 </script>
 
 </body>
