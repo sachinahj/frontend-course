@@ -13,9 +13,10 @@
       <!-- body goes here -->
 
       <div class = "row">
-        <div class="small-10 medium-8 large-6 small-centered medium-centered large-centered columns">
+        <div class="small-11 medium-10 large-9 small-centered medium-centered large-centered columns">
           <div class="title">
             <center>
+              <br>
               <img src="img/logo.png" width="200px" />
               <h2><b>QUIZ</b></h2>
               <br>
@@ -24,12 +25,16 @@
             
           </div>
         </div>
-        <div class="small-10 medium-8 large-6 small-centered medium-centered large-centered columns">
+        <div class="small-11 medium-10 large-9 small-centered medium-centered large-centered columns">
           <center>
             <div class="question"></div>
+            <div class="highscore" style="display:none">
+              <center><input type="text" class="user"></center>
+              <button class="submit alert">Submit Highscore</button>
+            </div>
           </center>
         </div>
-        <div class="small-10 medium-8 large-6 small-centered medium-centered large-centered columns">
+        <div class="small-11 medium-10 large-9 small-centered medium-centered large-centered columns">
           <center>
             <div class="answers" style="display:none">
               <form action="">
@@ -40,18 +45,21 @@
                 <label class="three"><input type="radio" name="answer" value="2"></label>
                 <br>
                 <label class="four"><input type="radio" name="answer" value="3"></label>
-                <br>
               </form>
             </div>
           </center>
         </div>
-        <div class="small-10 medium-8 large-6 small-centered medium-centered large-centered columns">
+        <div class="small-11 medium-10 large-9 small-centered medium-centered large-centered columns">
           <center>
-            <button class="submit success" style="display:none">Submit</button>
+            <button class="submit success" style="display:none">Submit Answer</button>
             <button class="start">Start</button>
           </center>
         </div>
-
+        <div class="small-11 medium-10 large-9 small-centered medium-centered large-centered columns">
+          <center>
+            <div class="leaderboard"><h5>Leaderboard here</h5></div>
+          </center>
+        </div>
       <div>
       
       
